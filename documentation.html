@@ -634,7 +634,98 @@
                     └── package.json
             </pre>
         </div>
+    <div class="section installation-section">
+        <h1><i class="fas fa-bug"></i> Utilisation de Bruno pour tester les API</h1>
+
+        <h2>Prérequis</h2>
+        <div class="prerequisites">
+            <ul>
+                <li>Bruno (disponible sur Chrome Web Store)</li>
+                <li>L'application backend doit être en cours d'exécution</li>
+            </ul>
+        </div>
+
+        <h2>Endpoints de l'API</h2>
+        <div class="command-block">
+            <h3>Authentification</h3>
+            <p>POST /api/auth/register</p>
+            <pre>
+                {
+                "name": "votre_nom",
+                "email": "votre_email",
+                "password": "votre_mot_de_passe"
+                }
+                            </pre>
+
+                            <p>POST /api/auth/login</p>
+                            <pre>
+                {
+                "email": "votre_email",
+                "password": "votre_mot_de_passe"
+                }
+            </pre>
+
+            <h3>Items</h3>
+            <p>GET /api/items</p>
+            <p>POST /api/items</p>
+            <pre>
+                {
+                "name": "nom_de_l_item",
+                "description": "description_de_l_item",
+                "price": 100
+                }
+            </pre>
+
+            <p>GET /api/items/:id</p>
+            <p>PUT /api/items/:id</p>
+            <p>DELETE /api/items/:id</p>
+        </div>
+
+        <h2>Configuration de Bruno</h2>
+        <div class="prerequisites">
+            <ol>
+                <li>Ouvrir Bruno dans votre navigateur</li>
+                <li>Créer un nouveau workspace nommé "CRUD App API Tests"</li>
+                <li>Créer les requêtes suivantes :</li>
+                <ul>
+                    <li>Register User (POST /api/auth/register)</li>
+                    <li>Login User (POST /api/auth/login)</li>
+                    <li>Get All Items (GET /api/items)</li>
+                    <li>Create Item (POST /api/items)</li>
+                    <li>Get Item (GET /api/items/:id)</li>
+                    <li>Update Item (PUT /api/items/:id)</li>
+                    <li>Delete Item (DELETE /api/items/:id)</li>
+                </ul>
+            </ol>
+        </div>
+
+        <h2>Exemple de Test Complet</h2>
+        <div class="command-block">
+            <ol>
+                <li>Exécuter la requête Register User avec vos données</li>
+                <li>Exécuter la requête Login User pour obtenir le token JWT</li>
+                <li>Ajouter le token JWT dans l'en-tête Authorization pour les requêtes suivantes</li>
+                <li>Créer un nouvel item avec Create Item</li>
+                <li>Vérifier que l'item apparaît dans Get All Items</li>
+                <li>Mettre à jour l'item avec Update Item</li>
+                <li>Supprimer l'item avec Delete Item</li>
+            </ol>
+        </div>
+
+        <h2>Conseils pour l'utilisation de Bruno</h2>
+        <div class="prerequisites">
+            <ul>
+                <li>Utilisez les variables d'environnement pour stocker des valeurs répétitives</li>
+                <li>Sauvegardez vos requêtes pour une utilisation future</li>
+                <li>Utilisez les tests automatisés pour vérifier les réponses</li>
+                <li>Organisez vos requêtes en dossiers logiques</li>
+            </ul>
+        </div>
     </div>
+
+    </div>
+
+
     
     <footer>
         <div class="container">

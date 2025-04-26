@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     const loadUser = async () => {
       if (token) {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth/me');
+          const res = await axios.get('http://localhost:5001/api/auth/me');
           setUser(res.data);
           setIsAuthenticated(true);
         } catch (err) {
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (formData) => {
     try {
       console.log('Sending registration request with data:', formData);
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await axios.post('http://localhost:5001/api/auth/register', formData);
       console.log('Registration response:', res.data);
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token);
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
   // Login user
   const login = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('http://localhost:5001/api/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token);
       setError(null);

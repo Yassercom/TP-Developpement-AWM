@@ -16,7 +16,7 @@ export const ItemProvider = ({ children }) => {
       if (isAuthenticated) {
         try {
           setLoading(true);
-          const res = await axios.get('http://localhost:5000/api/items');
+          const res = await axios.get('http://localhost:5001/api/items');
           setItems(res.data);
           setError(null);
         } catch (err) {
@@ -35,7 +35,7 @@ export const ItemProvider = ({ children }) => {
   // Add item
   const addItem = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/items', formData);
+      const res = await axios.post('http://localhost:5001/api/items', formData);
       setItems([res.data, ...items]);
       setError(null);
       return true;
@@ -48,7 +48,7 @@ export const ItemProvider = ({ children }) => {
   // Update item
   const updateItem = async (id, formData) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/items/${id}`, formData);
+      const res = await axios.put(`http://localhost:5001/api/items/${id}`, formData);
       setItems(items.map(item => (item.id === id ? res.data : item)));
       setError(null);
       return true;
@@ -61,7 +61,7 @@ export const ItemProvider = ({ children }) => {
   // Delete item
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/items/${id}`);
+      await axios.delete(`http://localhost:5001/api/items/${id}`);
       setItems(items.filter(item => item.id !== id));
       setError(null);
       return true;

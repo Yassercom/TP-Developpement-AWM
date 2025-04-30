@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import apiService from '../services/ApiService';
 
 export const AuthContext = createContext();
 
@@ -12,18 +11,16 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // Set axios default headers
-  if (token) {
-    axios.defaults.headers.common['x-auth-token'] = token;
-  } else {
-    delete axios.defaults.headers.common['x-auth-token'];
-  }
+  useEffect(() => {
+    apiService.setAuthToken(token);
+  }, [token]);
 
   // Load user if token exists
   useEffect(() => {
     const loadUser = async () => {
       if (token) {
         try {
-          const res = await axios.get('http://localhost:5001/api/auth/me');
+          const res = await apiService.get('/api/auth/me');
           setUser(res.data);
           setIsAuthenticated(true);
         } catch (err) {
@@ -43,15 +40,12 @@ export const AuthProvider = ({ children }) => {
   // Register user
   const register = async (formData) => {
     try {
-      console.log('Sending registration request with data:', formData);
-      const res = await axios.post('http://localhost:5001/api/auth/register', formData);
-      console.log('Registration response:', res.data);
+      const res = await apiService.post('/api/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token);
       setError(null);
       return true;
     } catch (err) {
-      console.error('Registration error:', err);
       setError(err.response?.data?.msg || 'Registration failed');
       return false;
     }
@@ -60,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   // Login user
   const login = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', formData);
+      const res = await apiService.post('/api/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token);
       setError(null);

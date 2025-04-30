@@ -1,4 +1,5 @@
 const Item = require('../models/Item');
+const { validationResult } = require('express-validator');
 
 // Get all items for the authenticated user
 exports.getAllItems = async (req, res) => {
@@ -13,6 +14,10 @@ exports.getAllItems = async (req, res) => {
 
 // Get a specific item by ID
 exports.getItemById = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   try {
     const item = await Item.getById(req.params.id, req.user.id);
     
@@ -29,6 +34,10 @@ exports.getItemById = async (req, res) => {
 
 // Create a new item
 exports.createItem = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { title, description } = req.body;
   
   try {
@@ -42,6 +51,10 @@ exports.createItem = async (req, res) => {
 
 // Update an existing item
 exports.updateItem = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { title, description } = req.body;
   
   try {
@@ -63,6 +76,10 @@ exports.updateItem = async (req, res) => {
 
 // Delete an item
 exports.deleteItem = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   try {
     let item = await Item.getById(req.params.id, req.user.id);
     

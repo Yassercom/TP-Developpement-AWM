@@ -1,0 +1,22 @@
+{
+  "name": "tp-developpement-awm",
+  "version": "1.0.0",
+  "description": "A complete web application with React frontend, Express backend, and PostgreSQL database.",
+  "main": "index.js",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
